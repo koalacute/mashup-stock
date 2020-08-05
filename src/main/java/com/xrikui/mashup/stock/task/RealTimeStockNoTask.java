@@ -24,7 +24,7 @@ public class RealTimeStockNoTask {
     @Autowired
     private StockConfigService stockConfigService;
 
-    @Scheduled(cron = "0 0/1 * * * *")
+    @Scheduled(cron = "0 0/1 9,10,11,13,14 * * ? *")
     public void realTimeStockNo() {
         LOGGER.info("【实时股价通知】 任务启动");
 
