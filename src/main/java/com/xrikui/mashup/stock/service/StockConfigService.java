@@ -10,6 +10,8 @@ import com.xrikui.mashup.stock.entity.StockConfigExample;
 import com.xrikui.mashup.stock.entity.StockRecord;
 import com.xrikui.mashup.stock.mapper.StockConfigMapper;
 import com.xrikui.mashup.stock.mapper.StockRecordMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +21,14 @@ import java.util.List;
 @Service
 public class StockConfigService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(StockConfigService.class);
+
     @Autowired
     private MashupConfigService mashupConfigService;
     @Autowired
     private RestTemplateService restTemplateService;
+    @Autowired
+    private StockSendMessageService stockSendMessageService;
     @Autowired
     private StockConfigMapper stockConfigMapper;
     @Autowired
@@ -52,10 +58,15 @@ public class StockConfigService {
         stockConfigList.forEach(stockConfig -> {
             StockRecord stockRecord = handlerRestContent(rest(baseUrl, stockConfig));
             if (null != stockRecord) {
+                LOGGER.info("【实时通知】开始处理发送逻辑,当前记录股票名称:{}", stockRecord.getName());
+                stockSendMessageService.send(stockRecord);
+
+                // 插入记录
                 stockRecordMapper.insertSelective(stockRecord);
+                LOGGER.info("【实时通知】完成处理发送逻辑,当前记录股票名称:{}", stockRecord.getName());
+            } else {
+                LOGGER.info("【实时通知】未查询到对应的股票信息,当前记录股票代码:{}", stockConfig.getStockCode());
             }
-            // 发送通知
-            System.out.println("我已发送通知");
         });
     }
 

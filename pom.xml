@@ -21,7 +21,7 @@
     <dependencies>
         <dependency>
             <groupId>com.xrikui</groupId>
-            <artifactId>mashup-common</artifactId>
+            <artifactId>mashup-feige</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
