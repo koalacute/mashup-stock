@@ -11,6 +11,7 @@ import com.xrikui.mashup.stock.entity.StockConfigExample;
 import com.xrikui.mashup.stock.entity.StockRecord;
 import com.xrikui.mashup.stock.mapper.StockConfigMapper;
 import com.xrikui.mashup.stock.mapper.StockRecordMapper;
+import com.xrikui.mashup.stock.mapper.ext.StockRecordExtMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,8 @@ public class StockConfigService {
     private StockConfigMapper stockConfigMapper;
     @Autowired
     private StockRecordMapper stockRecordMapper;
+    @Autowired
+    private StockRecordExtMapper stockRecordExtMapper;
 
 
     /**
@@ -65,7 +68,7 @@ public class StockConfigService {
                 // 插入记录
                 stockRecord.setNowRate(rateDto.getNowRateString());
                 stockRecord.setLastRate(rateDto.getLastRateString());
-                stockRecordMapper.insertSelective(stockRecord);
+                stockRecordExtMapper.insertByDuplicateKey(stockRecord);
                 LOGGER.info("【实时通知】完成处理发送逻辑,当前记录股票名称:{}", stockRecord.getName());
             } else {
                 LOGGER.info("【实时通知】未查询到对应的股票信息,当前记录股票代码:{}", stockConfig.getStockCode());
@@ -93,6 +96,8 @@ public class StockConfigService {
         stockRecord.setCurrentPrice(BigDecimalUtils.transform(splitList[3]));
         stockRecord.setTodayHighestPrice(BigDecimalUtils.transform(splitList[4]));
         stockRecord.setTodayLowestPrice(BigDecimalUtils.transform(splitList[5]));
+        stockRecord.setCreateTime(new Date());
+        stockRecord.setUpdateTime(new Date());
         return stockRecord;
     }
 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xrikui.mashup.stock.mapper.ext.StockRecordExtMapper">
+  <resultMap id="BaseResultMap" type="com.xrikui.mashup.stock.entity.StockRecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="current_price" jdbcType="DECIMAL" property="currentPrice" />
+    <result column="now_rate" jdbcType="VARCHAR" property="nowRate" />
+    <result column="last_rate" jdbcType="VARCHAR" property="lastRate" />
+    <result column="today_date" jdbcType="VARCHAR" property="todayDate" />
+    <result column="today_open_price" jdbcType="DECIMAL" property="todayOpenPrice" />
+    <result column="today_highest_price" jdbcType="DECIMAL" property="todayHighestPrice" />
+    <result column="today_lowest_price" jdbcType="DECIMAL" property="todayLowestPrice" />
+    <result column="yesterday_close_price" jdbcType="DECIMAL" property="yesterdayClosePrice" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <sql id="TableName">
+    t_stock_record
+  </sql>
+
+  <insert id="insertByDuplicateKey" parameterType="com.xrikui.mashup.stock.entity.StockRecord">
+    insert into
+    <include refid="TableName"/>
+    (id, name, current_price,
+    now_rate, last_rate, today_date,
+    today_open_price, today_highest_price, today_lowest_price,
+    yesterday_close_price, create_time, update_time
+    )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{currentPrice,jdbcType=DECIMAL},
+    #{nowRate,jdbcType=VARCHAR}, #{lastRate,jdbcType=VARCHAR}, #{todayDate,jdbcType=VARCHAR},
+    #{todayOpenPrice,jdbcType=DECIMAL}, #{todayHighestPrice,jdbcType=DECIMAL}, #{todayLowestPrice,jdbcType=DECIMAL},
+    #{yesterdayClosePrice,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+    ) on duplicate key update current_price = #{currentPrice,jdbcType=DECIMAL},now_rate = #{nowRate,jdbcType=VARCHAR},
+    last_rate = #{lastRate,jdbcType=VARCHAR},today_date = #{todayDate,jdbcType=VARCHAR},today_open_price = #{todayOpenPrice,jdbcType=DECIMAL},
+    today_highest_price = #{todayHighestPrice,jdbcType=DECIMAL},today_lowest_price = #{todayLowestPrice,jdbcType=DECIMAL},
+    yesterday_close_price = #{yesterdayClosePrice,jdbcType=DECIMAL},update_time = NOW()
+  </insert>
+</mapper>
