@@ -4,12 +4,14 @@
   <resultMap id="BaseResultMap" type="com.xrikui.mashup.stock.entity.StockRecord">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="current_price" jdbcType="DECIMAL" property="currentPrice" />
+    <result column="now_rate" jdbcType="VARCHAR" property="nowRate" />
+    <result column="last_rate" jdbcType="VARCHAR" property="lastRate" />
     <result column="today_date" jdbcType="VARCHAR" property="todayDate" />
     <result column="today_open_price" jdbcType="DECIMAL" property="todayOpenPrice" />
-    <result column="yesterday_close_price" jdbcType="DECIMAL" property="yesterdayClosePrice" />
-    <result column="current_price" jdbcType="DECIMAL" property="currentPrice" />
     <result column="today_highest_price" jdbcType="DECIMAL" property="todayHighestPrice" />
     <result column="today_lowest_price" jdbcType="DECIMAL" property="todayLowestPrice" />
+    <result column="yesterday_close_price" jdbcType="DECIMAL" property="yesterdayClosePrice" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -72,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, today_date, today_open_price, yesterday_close_price, current_price, today_highest_price, 
-    today_lowest_price, create_time, update_time
+    id, name, current_price, now_rate, last_rate, today_date, today_open_price, today_highest_price, 
+    today_lowest_price, yesterday_close_price, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.xrikui.mashup.stock.entity.StockRecordExample" resultMap="BaseResultMap">
     select
@@ -106,14 +108,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.xrikui.mashup.stock.entity.StockRecord">
-    insert into t_stock_record (id, name, today_date, 
-      today_open_price, yesterday_close_price, current_price, 
-      today_highest_price, today_lowest_price, create_time, 
-      update_time)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{todayDate,jdbcType=VARCHAR}, 
-      #{todayOpenPrice,jdbcType=DECIMAL}, #{yesterdayClosePrice,jdbcType=DECIMAL}, #{currentPrice,jdbcType=DECIMAL}, 
-      #{todayHighestPrice,jdbcType=DECIMAL}, #{todayLowestPrice,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+    insert into t_stock_record (id, name, current_price, 
+      now_rate, last_rate, today_date, 
+      today_open_price, today_highest_price, today_lowest_price, 
+      yesterday_close_price, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{currentPrice,jdbcType=DECIMAL}, 
+      #{nowRate,jdbcType=VARCHAR}, #{lastRate,jdbcType=VARCHAR}, #{todayDate,jdbcType=VARCHAR}, 
+      #{todayOpenPrice,jdbcType=DECIMAL}, #{todayHighestPrice,jdbcType=DECIMAL}, #{todayLowestPrice,jdbcType=DECIMAL}, 
+      #{yesterdayClosePrice,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.xrikui.mashup.stock.entity.StockRecord">
     insert into t_stock_record
@@ -124,23 +128,29 @@
       <if test="name != null">
         name,
       </if>
+      <if test="currentPrice != null">
+        current_price,
+      </if>
+      <if test="nowRate != null">
+        now_rate,
+      </if>
+      <if test="lastRate != null">
+        last_rate,
+      </if>
       <if test="todayDate != null">
         today_date,
       </if>
       <if test="todayOpenPrice != null">
         today_open_price,
       </if>
-      <if test="yesterdayClosePrice != null">
-        yesterday_close_price,
-      </if>
-      <if test="currentPrice != null">
-        current_price,
-      </if>
       <if test="todayHighestPrice != null">
         today_highest_price,
       </if>
       <if test="todayLowestPrice != null">
         today_lowest_price,
+      </if>
+      <if test="yesterdayClosePrice != null">
+        yesterday_close_price,
       </if>
       <if test="createTime != null">
         create_time,
@@ -156,23 +166,29 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="currentPrice != null">
+        #{currentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="nowRate != null">
+        #{nowRate,jdbcType=VARCHAR},
+      </if>
+      <if test="lastRate != null">
+        #{lastRate,jdbcType=VARCHAR},
+      </if>
       <if test="todayDate != null">
         #{todayDate,jdbcType=VARCHAR},
       </if>
       <if test="todayOpenPrice != null">
         #{todayOpenPrice,jdbcType=DECIMAL},
       </if>
-      <if test="yesterdayClosePrice != null">
-        #{yesterdayClosePrice,jdbcType=DECIMAL},
-      </if>
-      <if test="currentPrice != null">
-        #{currentPrice,jdbcType=DECIMAL},
-      </if>
       <if test="todayHighestPrice != null">
         #{todayHighestPrice,jdbcType=DECIMAL},
       </if>
       <if test="todayLowestPrice != null">
         #{todayLowestPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="yesterdayClosePrice != null">
+        #{yesterdayClosePrice,jdbcType=DECIMAL},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -197,23 +213,29 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
+      <if test="record.currentPrice != null">
+        current_price = #{record.currentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.nowRate != null">
+        now_rate = #{record.nowRate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastRate != null">
+        last_rate = #{record.lastRate,jdbcType=VARCHAR},
+      </if>
       <if test="record.todayDate != null">
         today_date = #{record.todayDate,jdbcType=VARCHAR},
       </if>
       <if test="record.todayOpenPrice != null">
         today_open_price = #{record.todayOpenPrice,jdbcType=DECIMAL},
       </if>
-      <if test="record.yesterdayClosePrice != null">
-        yesterday_close_price = #{record.yesterdayClosePrice,jdbcType=DECIMAL},
-      </if>
-      <if test="record.currentPrice != null">
-        current_price = #{record.currentPrice,jdbcType=DECIMAL},
-      </if>
       <if test="record.todayHighestPrice != null">
         today_highest_price = #{record.todayHighestPrice,jdbcType=DECIMAL},
       </if>
       <if test="record.todayLowestPrice != null">
         today_lowest_price = #{record.todayLowestPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.yesterdayClosePrice != null">
+        yesterday_close_price = #{record.yesterdayClosePrice,jdbcType=DECIMAL},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -230,12 +252,14 @@
     update t_stock_record
     set id = #{record.id,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
+      current_price = #{record.currentPrice,jdbcType=DECIMAL},
+      now_rate = #{record.nowRate,jdbcType=VARCHAR},
+      last_rate = #{record.lastRate,jdbcType=VARCHAR},
       today_date = #{record.todayDate,jdbcType=VARCHAR},
       today_open_price = #{record.todayOpenPrice,jdbcType=DECIMAL},
-      yesterday_close_price = #{record.yesterdayClosePrice,jdbcType=DECIMAL},
-      current_price = #{record.currentPrice,jdbcType=DECIMAL},
       today_highest_price = #{record.todayHighestPrice,jdbcType=DECIMAL},
       today_lowest_price = #{record.todayLowestPrice,jdbcType=DECIMAL},
+      yesterday_close_price = #{record.yesterdayClosePrice,jdbcType=DECIMAL},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -248,23 +272,29 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
+      <if test="currentPrice != null">
+        current_price = #{currentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="nowRate != null">
+        now_rate = #{nowRate,jdbcType=VARCHAR},
+      </if>
+      <if test="lastRate != null">
+        last_rate = #{lastRate,jdbcType=VARCHAR},
+      </if>
       <if test="todayDate != null">
         today_date = #{todayDate,jdbcType=VARCHAR},
       </if>
       <if test="todayOpenPrice != null">
         today_open_price = #{todayOpenPrice,jdbcType=DECIMAL},
       </if>
-      <if test="yesterdayClosePrice != null">
-        yesterday_close_price = #{yesterdayClosePrice,jdbcType=DECIMAL},
-      </if>
-      <if test="currentPrice != null">
-        current_price = #{currentPrice,jdbcType=DECIMAL},
-      </if>
       <if test="todayHighestPrice != null">
         today_highest_price = #{todayHighestPrice,jdbcType=DECIMAL},
       </if>
       <if test="todayLowestPrice != null">
         today_lowest_price = #{todayLowestPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="yesterdayClosePrice != null">
+        yesterday_close_price = #{yesterdayClosePrice,jdbcType=DECIMAL},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -278,12 +308,14 @@
   <update id="updateByPrimaryKey" parameterType="com.xrikui.mashup.stock.entity.StockRecord">
     update t_stock_record
     set name = #{name,jdbcType=VARCHAR},
+      current_price = #{currentPrice,jdbcType=DECIMAL},
+      now_rate = #{nowRate,jdbcType=VARCHAR},
+      last_rate = #{lastRate,jdbcType=VARCHAR},
       today_date = #{todayDate,jdbcType=VARCHAR},
       today_open_price = #{todayOpenPrice,jdbcType=DECIMAL},
-      yesterday_close_price = #{yesterdayClosePrice,jdbcType=DECIMAL},
-      current_price = #{currentPrice,jdbcType=DECIMAL},
       today_highest_price = #{todayHighestPrice,jdbcType=DECIMAL},
       today_lowest_price = #{todayLowestPrice,jdbcType=DECIMAL},
+      yesterday_close_price = #{yesterdayClosePrice,jdbcType=DECIMAL},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

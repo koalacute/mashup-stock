@@ -236,6 +236,206 @@ public class StockRecordExample {
             return (Criteria) this;
         }
 
+        public Criteria andCurrentPriceIsNull() {
+            addCriterion("current_price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPriceIsNotNull() {
+            addCriterion("current_price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPriceEqualTo(BigDecimal value) {
+            addCriterion("current_price =", value, "currentPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPriceNotEqualTo(BigDecimal value) {
+            addCriterion("current_price <>", value, "currentPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPriceGreaterThan(BigDecimal value) {
+            addCriterion("current_price >", value, "currentPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("current_price >=", value, "currentPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPriceLessThan(BigDecimal value) {
+            addCriterion("current_price <", value, "currentPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("current_price <=", value, "currentPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPriceIn(List<BigDecimal> values) {
+            addCriterion("current_price in", values, "currentPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPriceNotIn(List<BigDecimal> values) {
+            addCriterion("current_price not in", values, "currentPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("current_price between", value1, value2, "currentPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("current_price not between", value1, value2, "currentPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowRateIsNull() {
+            addCriterion("now_rate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowRateIsNotNull() {
+            addCriterion("now_rate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowRateEqualTo(String value) {
+            addCriterion("now_rate =", value, "nowRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowRateNotEqualTo(String value) {
+            addCriterion("now_rate <>", value, "nowRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowRateGreaterThan(String value) {
+            addCriterion("now_rate >", value, "nowRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowRateGreaterThanOrEqualTo(String value) {
+            addCriterion("now_rate >=", value, "nowRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowRateLessThan(String value) {
+            addCriterion("now_rate <", value, "nowRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowRateLessThanOrEqualTo(String value) {
+            addCriterion("now_rate <=", value, "nowRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowRateLike(String value) {
+            addCriterion("now_rate like", value, "nowRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowRateNotLike(String value) {
+            addCriterion("now_rate not like", value, "nowRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowRateIn(List<String> values) {
+            addCriterion("now_rate in", values, "nowRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowRateNotIn(List<String> values) {
+            addCriterion("now_rate not in", values, "nowRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowRateBetween(String value1, String value2) {
+            addCriterion("now_rate between", value1, value2, "nowRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowRateNotBetween(String value1, String value2) {
+            addCriterion("now_rate not between", value1, value2, "nowRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastRateIsNull() {
+            addCriterion("last_rate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastRateIsNotNull() {
+            addCriterion("last_rate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastRateEqualTo(String value) {
+            addCriterion("last_rate =", value, "lastRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastRateNotEqualTo(String value) {
+            addCriterion("last_rate <>", value, "lastRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastRateGreaterThan(String value) {
+            addCriterion("last_rate >", value, "lastRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastRateGreaterThanOrEqualTo(String value) {
+            addCriterion("last_rate >=", value, "lastRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastRateLessThan(String value) {
+            addCriterion("last_rate <", value, "lastRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastRateLessThanOrEqualTo(String value) {
+            addCriterion("last_rate <=", value, "lastRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastRateLike(String value) {
+            addCriterion("last_rate like", value, "lastRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastRateNotLike(String value) {
+            addCriterion("last_rate not like", value, "lastRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastRateIn(List<String> values) {
+            addCriterion("last_rate in", values, "lastRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastRateNotIn(List<String> values) {
+            addCriterion("last_rate not in", values, "lastRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastRateBetween(String value1, String value2) {
+            addCriterion("last_rate between", value1, value2, "lastRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastRateNotBetween(String value1, String value2) {
+            addCriterion("last_rate not between", value1, value2, "lastRate");
+            return (Criteria) this;
+        }
+
         public Criteria andTodayDateIsNull() {
             addCriterion("today_date is null");
             return (Criteria) this;
@@ -366,126 +566,6 @@ public class StockRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andYesterdayClosePriceIsNull() {
-            addCriterion("yesterday_close_price is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andYesterdayClosePriceIsNotNull() {
-            addCriterion("yesterday_close_price is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andYesterdayClosePriceEqualTo(BigDecimal value) {
-            addCriterion("yesterday_close_price =", value, "yesterdayClosePrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andYesterdayClosePriceNotEqualTo(BigDecimal value) {
-            addCriterion("yesterday_close_price <>", value, "yesterdayClosePrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andYesterdayClosePriceGreaterThan(BigDecimal value) {
-            addCriterion("yesterday_close_price >", value, "yesterdayClosePrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andYesterdayClosePriceGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("yesterday_close_price >=", value, "yesterdayClosePrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andYesterdayClosePriceLessThan(BigDecimal value) {
-            addCriterion("yesterday_close_price <", value, "yesterdayClosePrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andYesterdayClosePriceLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("yesterday_close_price <=", value, "yesterdayClosePrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andYesterdayClosePriceIn(List<BigDecimal> values) {
-            addCriterion("yesterday_close_price in", values, "yesterdayClosePrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andYesterdayClosePriceNotIn(List<BigDecimal> values) {
-            addCriterion("yesterday_close_price not in", values, "yesterdayClosePrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andYesterdayClosePriceBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("yesterday_close_price between", value1, value2, "yesterdayClosePrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andYesterdayClosePriceNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("yesterday_close_price not between", value1, value2, "yesterdayClosePrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentPriceIsNull() {
-            addCriterion("current_price is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentPriceIsNotNull() {
-            addCriterion("current_price is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentPriceEqualTo(BigDecimal value) {
-            addCriterion("current_price =", value, "currentPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentPriceNotEqualTo(BigDecimal value) {
-            addCriterion("current_price <>", value, "currentPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentPriceGreaterThan(BigDecimal value) {
-            addCriterion("current_price >", value, "currentPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentPriceGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("current_price >=", value, "currentPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentPriceLessThan(BigDecimal value) {
-            addCriterion("current_price <", value, "currentPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentPriceLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("current_price <=", value, "currentPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentPriceIn(List<BigDecimal> values) {
-            addCriterion("current_price in", values, "currentPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentPriceNotIn(List<BigDecimal> values) {
-            addCriterion("current_price not in", values, "currentPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentPriceBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("current_price between", value1, value2, "currentPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentPriceNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("current_price not between", value1, value2, "currentPrice");
-            return (Criteria) this;
-        }
-
         public Criteria andTodayHighestPriceIsNull() {
             addCriterion("today_highest_price is null");
             return (Criteria) this;
@@ -603,6 +683,66 @@ public class StockRecordExample {
 
         public Criteria andTodayLowestPriceNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("today_lowest_price not between", value1, value2, "todayLowestPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesterdayClosePriceIsNull() {
+            addCriterion("yesterday_close_price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesterdayClosePriceIsNotNull() {
+            addCriterion("yesterday_close_price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesterdayClosePriceEqualTo(BigDecimal value) {
+            addCriterion("yesterday_close_price =", value, "yesterdayClosePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesterdayClosePriceNotEqualTo(BigDecimal value) {
+            addCriterion("yesterday_close_price <>", value, "yesterdayClosePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesterdayClosePriceGreaterThan(BigDecimal value) {
+            addCriterion("yesterday_close_price >", value, "yesterdayClosePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesterdayClosePriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("yesterday_close_price >=", value, "yesterdayClosePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesterdayClosePriceLessThan(BigDecimal value) {
+            addCriterion("yesterday_close_price <", value, "yesterdayClosePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesterdayClosePriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("yesterday_close_price <=", value, "yesterdayClosePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesterdayClosePriceIn(List<BigDecimal> values) {
+            addCriterion("yesterday_close_price in", values, "yesterdayClosePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesterdayClosePriceNotIn(List<BigDecimal> values) {
+            addCriterion("yesterday_close_price not in", values, "yesterdayClosePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesterdayClosePriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("yesterday_close_price between", value1, value2, "yesterdayClosePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesterdayClosePriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("yesterday_close_price not between", value1, value2, "yesterdayClosePrice");
             return (Criteria) this;
         }
 

@@ -5,6 +5,7 @@ import com.xrikui.mashup.common.constant.CharConstant;
 import com.xrikui.mashup.common.service.RestTemplateService;
 import com.xrikui.mashup.common.utils.BigDecimalUtils;
 import com.xrikui.mashup.common.utils.DateTimeUtils;
+import com.xrikui.mashup.stock.dto.RateDto;
 import com.xrikui.mashup.stock.entity.StockConfig;
 import com.xrikui.mashup.stock.entity.StockConfigExample;
 import com.xrikui.mashup.stock.entity.StockRecord;
@@ -59,9 +60,11 @@ public class StockConfigService {
             StockRecord stockRecord = handlerRestContent(rest(baseUrl, stockConfig));
             if (null != stockRecord) {
                 LOGGER.info("【实时通知】开始处理发送逻辑,当前记录股票名称:{}", stockRecord.getName());
-                stockSendMessageService.send(stockRecord);
+                RateDto rateDto = stockSendMessageService.send(stockRecord);
 
                 // 插入记录
+                stockRecord.setNowRate(rateDto.getNowRateString());
+                stockRecord.setLastRate(rateDto.getLastRateString());
                 stockRecordMapper.insertSelective(stockRecord);
                 LOGGER.info("【实时通知】完成处理发送逻辑,当前记录股票名称:{}", stockRecord.getName());
             } else {

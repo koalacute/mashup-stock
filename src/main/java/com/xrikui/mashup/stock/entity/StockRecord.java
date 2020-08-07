@@ -8,17 +8,21 @@ public class StockRecord {
 
     private String name;
 
+    private BigDecimal currentPrice;
+
+    private String nowRate;
+
+    private String lastRate;
+
     private String todayDate;
 
     private BigDecimal todayOpenPrice;
 
-    private BigDecimal yesterdayClosePrice;
-
-    private BigDecimal currentPrice;
-
     private BigDecimal todayHighestPrice;
 
     private BigDecimal todayLowestPrice;
+
+    private BigDecimal yesterdayClosePrice;
 
     private Date createTime;
 
@@ -40,6 +44,30 @@ public class StockRecord {
         this.name = name == null ? null : name.trim();
     }
 
+    public BigDecimal getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(BigDecimal currentPrice) {
+        this.currentPrice = currentPrice;
+    }
+
+    public String getNowRate() {
+        return nowRate;
+    }
+
+    public void setNowRate(String nowRate) {
+        this.nowRate = nowRate == null ? null : nowRate.trim();
+    }
+
+    public String getLastRate() {
+        return lastRate;
+    }
+
+    public void setLastRate(String lastRate) {
+        this.lastRate = lastRate == null ? null : lastRate.trim();
+    }
+
     public String getTodayDate() {
         return todayDate;
     }
@@ -56,22 +84,6 @@ public class StockRecord {
         this.todayOpenPrice = todayOpenPrice;
     }
 
-    public BigDecimal getYesterdayClosePrice() {
-        return yesterdayClosePrice;
-    }
-
-    public void setYesterdayClosePrice(BigDecimal yesterdayClosePrice) {
-        this.yesterdayClosePrice = yesterdayClosePrice;
-    }
-
-    public BigDecimal getCurrentPrice() {
-        return currentPrice;
-    }
-
-    public void setCurrentPrice(BigDecimal currentPrice) {
-        this.currentPrice = currentPrice;
-    }
-
     public BigDecimal getTodayHighestPrice() {
         return todayHighestPrice;
     }
@@ -86,6 +98,14 @@ public class StockRecord {
 
     public void setTodayLowestPrice(BigDecimal todayLowestPrice) {
         this.todayLowestPrice = todayLowestPrice;
+    }
+
+    public BigDecimal getYesterdayClosePrice() {
+        return yesterdayClosePrice;
+    }
+
+    public void setYesterdayClosePrice(BigDecimal yesterdayClosePrice) {
+        this.yesterdayClosePrice = yesterdayClosePrice;
     }
 
     public Date getCreateTime() {
