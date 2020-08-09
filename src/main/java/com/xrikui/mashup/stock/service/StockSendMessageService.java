@@ -149,16 +149,20 @@ public class StockSendMessageService {
         BigDecimal yesterdayPrice = stockRecord.getYesterdayClosePrice();
 
         // 相对于昨收价格的涨跌幅
-        BigDecimal nowRate = BigDecimalUtils.calculateRate(currentPrice, yesterdayPrice, 2);
+        BigDecimal nowRate = BigDecimalUtils.calculateRate(currentPrice, yesterdayPrice, 4);
         // 相对于上次价格的涨跌幅
-        BigDecimal lasRate = BigDecimalUtils.calculateRate(currentPrice, stockRecordLast.getCurrentPrice(), 2);
+        BigDecimal lasRate = BigDecimalUtils.calculateRate(currentPrice, stockRecordLast.getCurrentPrice(), 4);
 
         // 相对于昨收价格的涨跌幅 （百分比）
-        stockRecord.setNowRate(nowRate.multiply(BigDecimal.valueOf(100L)) + "%");
+        stockRecord.setNowRate(nowRate.multiply(BigDecimal.valueOf(100L)).setScale(2) + "%");
         // 相对于上次价格的涨跌幅 （百分比）
-        stockRecord.setLastRate(lasRate.multiply(BigDecimal.valueOf(100L)) + "%");
+        stockRecord.setLastRate(lasRate.multiply(BigDecimal.valueOf(100L)).setScale(2) + "%");
 
-        return (nowRate.abs()).compareTo(BigDecimal.valueOf(0.01)) > 0 && (lasRate.abs()).compareTo(BigDecimal.valueOf(0.005)) > 0;
+
+        String nowRateRefer = mashupConfigService.findConfigByName("当前涨跌幅参数");
+        String lasRateRefer = mashupConfigService.findConfigByName("上次涨跌幅参数");
+
+        return (nowRate.abs()).compareTo(BigDecimalUtils.transform(nowRateRefer)) > 0 && (lasRate.abs()).compareTo(BigDecimalUtils.transform(lasRateRefer)) > 0;
     }
 
 
