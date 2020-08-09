@@ -12,14 +12,17 @@ import java.util.List;
 @Service
 public class MashupConfigService {
 
+    private final MashupConfigMapper mashupConfigMapper;
+
     @Autowired
-    private MashupConfigMapper mashupConfigMapper;
+    public MashupConfigService(MashupConfigMapper mashupConfigMapper) {
+        this.mashupConfigMapper = mashupConfigMapper;
+    }
 
     /**
      * 通过配置名查询配置值
      *
-     * @param configName
-     * @return
+     * @param configName 配置名
      */
     public String findConfigByName(String configName) {
         MashupConfigExample mashupConfigExample = new MashupConfigExample();

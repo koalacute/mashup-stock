@@ -12,8 +12,12 @@ import java.util.List;
 @Service
 public class StockRecordService {
 
+    private final StockRecordMapper stockRecordMapper;
+
     @Autowired
-    private StockRecordMapper stockRecordMapper;
+    public StockRecordService(StockRecordMapper stockRecordMapper) {
+        this.stockRecordMapper = stockRecordMapper;
+    }
 
     public StockRecord findLastStockRecord(String name) {
         StockRecordExample stockRecordExample = new StockRecordExample();
