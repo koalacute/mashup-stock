@@ -148,6 +148,10 @@ public class StockSendMessageService {
         // 昨收价格
         BigDecimal yesterdayPrice = stockRecord.getYesterdayClosePrice();
 
+        if (currentPrice.compareTo(BigDecimal.ZERO) == 0 || yesterdayPrice.compareTo(BigDecimal.ZERO) == 0) {
+            return false;
+        }
+
         // 相对于昨收价格的涨跌幅
         BigDecimal nowRate = BigDecimalUtils.calculateRate(currentPrice, yesterdayPrice, 4);
         // 相对于上次价格的涨跌幅
