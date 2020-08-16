@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import com.xrikui.mashup.common.constant.CharConstant;
 import com.xrikui.mashup.common.service.RestTemplateService;
 import com.xrikui.mashup.common.utils.BigDecimalUtils;
+import com.xrikui.mashup.common.utils.ColorUtils;
 import com.xrikui.mashup.common.utils.DateTimeUtils;
 import com.xrikui.mashup.feige.entity.DataDetail;
 import com.xrikui.mashup.feige.entity.Detail;
@@ -176,33 +177,14 @@ public class StockSendMessageService {
      * @param stockRecord 当前股票记录信息
      */
     private SendMessageRequestDto packageRequestDto(StockRecord stockRecord) {
-        SendMessageRequestDto sendMessageRequestDto = new SendMessageRequestDto();
-        sendMessageRequestDto.setSecret(sendFeiGeSecret);
-        sendMessageRequestDto.setApp_key(sendFeiGeAppKey);
-        sendMessageRequestDto.setTemplate_id(sendFeiGeTemplateId);
+        SendMessageRequestDto sendMessageRequestDto = new SendMessageRequestDto(sendFeiGeSecret, sendFeiGeAppKey, sendFeiGeTemplateId);
 
-        Detail first = new Detail();
-        first.setValue("当前价格:" + stockRecord.getCurrentPrice() + ", 当前涨跌率:" + stockRecord.getNowRate());
-        first.setColor("#FF0000");
+        Detail first = new Detail("当前价格:" + stockRecord.getCurrentPrice() + ", 当前涨跌率:" + stockRecord.getNowRate(), ColorUtils.RED);
+        Detail keyword1 = new Detail(stockRecord.getName(), ColorUtils.RED);
+        Detail keyword2 = new Detail(DateUtil.format(new Date(), DateTimeUtils.YYYY_MM_DD_HH_MM_SS), ColorUtils.BLUE_PRO);
+        Detail remark = new Detail("较上次记录涨跌浮:" + stockRecord.getLastRate(), ColorUtils.RED);
 
-        Detail keyword1 = new Detail();
-        keyword1.setValue(stockRecord.getName());
-        keyword1.setColor("#FF0000");
-
-        Detail keyword2 = new Detail();
-        keyword2.setValue(DateUtil.format(new Date(), DateTimeUtils.YYYY_MM_DD_HH_MM_SS));
-        keyword2.setColor("#173177");
-
-        Detail remark = new Detail();
-        remark.setValue("较上次记录涨跌浮:" + stockRecord.getLastRate());
-        remark.setColor("#FF0000");
-
-        DataDetail dataDetail = new DataDetail();
-        dataDetail.setFirst(first);
-        dataDetail.setKeyword1(keyword1);
-        dataDetail.setKeyword2(keyword2);
-        dataDetail.setRemark(remark);
-        sendMessageRequestDto.setData(dataDetail);
+        sendMessageRequestDto.setData(new DataDetail(first, keyword1, keyword2, remark));
         return sendMessageRequestDto;
     }
 }

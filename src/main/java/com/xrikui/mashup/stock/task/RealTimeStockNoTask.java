@@ -1,5 +1,6 @@
 package com.xrikui.mashup.stock.task;
 
+import com.xrikui.mashup.common.utils.DateTimeUtils;
 import com.xrikui.mashup.stock.entity.StockConfig;
 import com.xrikui.mashup.stock.enums.StockConfigMarkEnum;
 import com.xrikui.mashup.stock.service.StockConfigService;
@@ -37,6 +38,11 @@ public class RealTimeStockNoTask {
         LOGGER.info("【实时股价监控】 任务已就绪,开始轮询监控股票配置");
 
         try {
+            if (!DateTimeUtils.checkTime()) {
+                LOGGER.info("【实时股价监控】 当前时间未处于交易时间内");
+                return;
+            }
+
             List<StockConfig> stockConfigList = stockConfigService.findAllStockConfig(StockConfigMarkEnum.ENABLE.value);
             if (CollectionUtils.isEmpty(stockConfigList)) {
                 LOGGER.info("【实时股价监控】 当前无股票配置,任务停止");
