@@ -130,8 +130,8 @@ public class StockSendMessageService {
 
         // 校验封装 && 发送通知
         if (checkSendMessageCondition(stockRecord, stockRecordLast)) {
-            SendMessageRequestDto sendMessageRequestDto = packageRequestDto(stockRecord);
-            restTemplateService.post(sendFeiGeUrl, sendMessageRequestDto);
+            packageRequestDto(stockRecord);
+            /*restTemplateService.post(sendFeiGeUrl, sendMessageRequestDto);*/
         }
     }
 
@@ -185,6 +185,7 @@ public class StockSendMessageService {
         Detail remark = new Detail("较上次记录涨跌浮:" + stockRecord.getLastRate(), ColorUtils.RED);
 
         sendMessageRequestDto.setData(new DataDetail(first, keyword1, keyword2, remark));
+        LOGGER.info("股票名称:{},主要信息:{},备注信息:{},当前时间:{}", keyword1.getValue(), first.getValue(), remark.getValue(), keyword2.getValue());
         return sendMessageRequestDto;
     }
 }
