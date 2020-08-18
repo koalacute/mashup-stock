@@ -65,15 +65,9 @@ public class StockSendMessageService {
         stockConfigList.forEach(stockConfig -> {
             StockRecord stockRecord = handlerRestContent(rest(baseUrl, stockConfig));
             if (null != stockRecord) {
-                LOGGER.info("【实时股价监控】开始发送监控通知,当前记录股票名称:{}", stockRecord.getName());
                 send(stockRecord);
-                LOGGER.info("【实时股价监控】完成发送监控通知,当前记录股票名称:{}", stockRecord.getName());
 
-                LOGGER.info("【实时股价监控】开始更新监控信息,当前记录股票名称:{}", stockRecord.getName());
                 stockRecordExtMapper.insertByDuplicateKey(stockRecord);
-                LOGGER.info("【实时股价监控】完成更新监控信息,当前记录股票名称:{}", stockRecord.getName());
-            } else {
-                LOGGER.info("【实时股价监控】未查询到对应的股票信息,当前记录股票代码:{}", stockConfig.getStockCode());
             }
         });
     }
@@ -179,13 +173,13 @@ public class StockSendMessageService {
     private SendMessageRequestDto packageRequestDto(StockRecord stockRecord) {
         SendMessageRequestDto sendMessageRequestDto = new SendMessageRequestDto(sendFeiGeSecret, sendFeiGeAppKey, sendFeiGeTemplateId);
 
-        Detail first = new Detail("当前价格:" + stockRecord.getCurrentPrice() + ", 当前涨跌率:" + stockRecord.getNowRate(), ColorUtils.RED);
-        Detail keyword1 = new Detail(stockRecord.getName(), ColorUtils.RED);
-        Detail keyword2 = new Detail(DateUtil.format(new Date(), DateTimeUtils.YYYY_MM_DD_HH_MM_SS), ColorUtils.BLUE_PRO);
-        Detail remark = new Detail("较上次记录涨跌浮:" + stockRecord.getLastRate(), ColorUtils.RED);
+        Detail first = new Detail("current_price:" + stockRecord.getCurrentPrice() + ", current_rate:" + stockRecord.getNowRate(), ColorUtils.RED);
+        Detail keyword1 = new Detail(stockRecord.getName().substring(0,1), ColorUtils.RED);
+        Detail keyword2 = new Detail(DateUtil.format(new Date(), DateTimeUtils.YYYY_MM_DD_HH_MM_SS_E), ColorUtils.BLUE_PRO);
+        Detail remark = new Detail("last_increase_price:" + stockRecord.getLastRate(), ColorUtils.RED);
 
         sendMessageRequestDto.setData(new DataDetail(first, keyword1, keyword2, remark));
-        LOGGER.info("股票名称:{},主要信息:{},备注信息:{},当前时间:{}", keyword1.getValue(), first.getValue(), remark.getValue(), keyword2.getValue());
+        LOGGER.info("stock_name:{},main_message:{},other_message:{},current_time:{}", keyword1.getValue(), first.getValue(), remark.getValue(), keyword2.getValue());
         return sendMessageRequestDto;
     }
 }
