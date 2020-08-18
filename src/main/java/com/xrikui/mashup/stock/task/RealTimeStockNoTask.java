@@ -35,22 +35,15 @@ public class RealTimeStockNoTask {
     @Scheduled(cron = "0/30 * * * * *")
     /*@Scheduled(cron = "0 0/1 9,10,11,13,14 * * ? *")*/
     public void realTimeStockNo() {
-        LOGGER.info("【实时股价监控】 任务已就绪,开始轮询监控股票配置");
 
         try {
-            if (!DateTimeUtils.checkTime()) {
-                LOGGER.info("【实时股价监控】 当前时间未处于交易时间内");
-                return;
-            }
-
             List<StockConfig> stockConfigList = stockConfigService.findAllStockConfig(StockConfigMarkEnum.ENABLE.value);
             if (CollectionUtils.isEmpty(stockConfigList)) {
-                LOGGER.info("【实时股价监控】 当前无股票配置,任务停止");
                 return;
             }
             stockSendMessageService.loop(stockConfigList);
         } catch (Exception e) {
-            LOGGER.error("【实时股价监控】 监控过程发生异常:", e);
+            LOGGER.error("error_message:", e);
         }
     }
 }
