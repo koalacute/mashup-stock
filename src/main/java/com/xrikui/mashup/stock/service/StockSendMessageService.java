@@ -173,13 +173,13 @@ public class StockSendMessageService {
     private SendMessageRequestDto packageRequestDto(StockRecord stockRecord) {
         SendMessageRequestDto sendMessageRequestDto = new SendMessageRequestDto(sendFeiGeSecret, sendFeiGeAppKey, sendFeiGeTemplateId);
 
-        Detail first = new Detail("current_price:" + stockRecord.getCurrentPrice() + ", current_rate:" + stockRecord.getNowRate(), ColorUtils.RED);
-        Detail keyword1 = new Detail(stockRecord.getName().substring(0,1), ColorUtils.RED);
+        Detail first = new Detail("current_price:" + stockRecord.getCurrentPrice() + "，current_rate:" + stockRecord.getNowRate(), ColorUtils.RED);
+        Detail keyword1 = new Detail(stockRecord.getName().substring(0, 1), ColorUtils.RED);
         Detail keyword2 = new Detail(DateUtil.format(new Date(), DateTimeUtils.YYYY_MM_DD_HH_MM_SS_E), ColorUtils.BLUE_PRO);
         Detail remark = new Detail("last_increase_price:" + stockRecord.getLastRate(), ColorUtils.RED);
 
         sendMessageRequestDto.setData(new DataDetail(first, keyword1, keyword2, remark));
-        LOGGER.info("stock_name:{},main_message:{},other_message:{},current_time:{}", keyword1.getValue(), first.getValue(), remark.getValue(), keyword2.getValue());
+        LOGGER.info("stock_name:" + keyword1.getValue() + "，" + first.getValue() + "，" + remark.getValue() + "，" + "current_time:" + keyword2.getValue());
         return sendMessageRequestDto;
     }
 }
