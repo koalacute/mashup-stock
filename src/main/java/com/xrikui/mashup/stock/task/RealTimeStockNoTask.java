@@ -1,5 +1,6 @@
 package com.xrikui.mashup.stock.task;
 
+import com.xrikui.mashup.common.utils.DateTimeUtils;
 import com.xrikui.mashup.stock.entity.StockConfig;
 import com.xrikui.mashup.stock.enums.StockConfigMarkEnum;
 import com.xrikui.mashup.stock.service.StockConfigService;
@@ -31,11 +32,15 @@ public class RealTimeStockNoTask {
         this.stockSendMessageService = stockSendMessageService;
     }
 
-    @Scheduled(cron = "0/30 * * * * *")
+    @Scheduled(cron = "0/5 * * * * *")
     /*@Scheduled(cron = "0 0/1 9,10,11,13,14 * * ? *")*/
     public void realTimeStockNo() {
 
         try {
+            if (!DateTimeUtils.checkTime()) {
+                return;
+            }
+
             List<StockConfig> stockConfigList = stockConfigService.findAllStockConfig(StockConfigMarkEnum.ENABLE.value);
             if (CollectionUtils.isEmpty(stockConfigList)) {
                 return;
